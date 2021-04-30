@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import UserCard from './UserCard';
+import { users } from './mockData';
 
-function App() {
+const App = () => {
+  const [userData, setUserData] = useState([]);
+
+  useEffect(() => {
+    selectRandomUsers();
+    setInterval(() => {
+      selectRandomUsers();
+    }, 5000);
+  }, []);
+
+  const selectRandomUsers = () => {
+    const res = [];
+    for (let i = 0; i < 4; ) {
+      const random = Math.floor(Math.random() * users.length);
+      if (res.indexOf(users[random]) !== -1) {
+        continue;
+      }
+      res.push(users[random]);
+      i++;
+    }
+    setUserData(res);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <div className='row'>
+        {userData.map((user) => (
+          <UserCard data={user} key={user.id} />
+        ))}
+      </div>
     </div>
   );
-}
+};
 
 export default App;

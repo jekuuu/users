@@ -1,0 +1,12 @@
+.card-img-top {
+  width: 150px;
+  height: 150px;
+  background-size: cover;
+  background-position: top center;
+  border-radius: 50%;
+}
+
+.card {
+  align-items: center;
+  height: 350px;
+}
